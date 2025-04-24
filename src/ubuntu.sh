@@ -54,16 +54,22 @@ configure_gnome() {
 install_smile() {
   echo "😀 Smile"
   echo "- Install Smile"
-  flatpak_install it.mijorus.smile
-  echo "- Disable default emoji panel hotkey"
-  gsettings set org.freedesktop.ibus.panel.emoji hotkey "[]"
+  flatpak_install it.mijorus.smile  
   echo "- Install and enable Smile GNOME extension"  
   if ! gnome-extensions list | grep 'smile-extension@mijorus.it' > /dev/null; then
     flatpak_install com.mattjakeman.ExtensionManager
     echo "Use the Extension Manager to install the Smile Extension"
     flatpak run com.mattjakeman.ExtensionManager    
-  fi  
-  gnome-extensions enable smile-extension@mijorus.it  
+  fi
+  gnome-extensions enable smile-extension@mijorus.it
+  echo "- Disable default emoji panel hotkey"
+  gsettings set org.freedesktop.ibus.panel.emoji hotkey "[]"
+  if ! dconf dump /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/ | grep 'it.mijorus.smile' > /dev/null; then
+    echo "- Set custom keybinding"
+    dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding "'<Super>period'"
+    dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command "'flatpak run it.mijorus.smile'"
+    dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name "'Smile'"
+  fi
   echo_done
 }
 
