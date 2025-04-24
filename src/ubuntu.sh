@@ -65,10 +65,7 @@ install_smile() {
   echo "- Disable default emoji panel hotkey"
   gsettings set org.freedesktop.ibus.panel.emoji hotkey "[]"
   if ! dconf dump /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/ | grep 'it.mijorus.smile' > /dev/null; then
-    echo "- Set custom keybinding"
-    dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding "'<Super>period'"
-    dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command "'flatpak run it.mijorus.smile'"
-    dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name "'Smile'"
+    echo "⚠️ Custom keybinding missing. Add 'flatpak run it.mijorus.smile' as custom shortcut."
   fi
   echo_done
 }
