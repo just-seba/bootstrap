@@ -60,9 +60,8 @@ install_smile() {
   echo "- Install and enable Smile GNOME extension"  
   if ! gnome-extensions list | grep 'smile-extension@mijorus.it' > /dev/null; then
     flatpak_install com.mattjakeman.ExtensionManager
-    flatpak run com.mattjakeman.ExtensionManager
     echo "Use the Extension Manager to install the Smile Extension"
-    read -p "Press enter AFTER the installation."
+    flatpak run com.mattjakeman.ExtensionManager    
   fi  
   gnome-extensions enable smile-extension@mijorus.it  
   echo_done
