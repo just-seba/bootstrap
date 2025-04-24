@@ -58,8 +58,9 @@ install_smile() {
   echo "- Disable default emoji panel hotkey"
   gsettings set org.freedesktop.ibus.panel.emoji hotkey "[]"
   echo "- Install and enable Smile GNOME extension"  
-  apt_install gnome-extensions-manager
   if ! gnome-extensions list | grep 'smile-extension@mijorus.it' > /dev/null; then
+    flatpak_install com.mattjakeman.ExtensionManager
+    flatpak run com.mattjakeman.ExtensionManager
     echo "Use the Extension Manager to install the Smile Extension"
     read -p "Press enter AFTER the installation."
   fi  
