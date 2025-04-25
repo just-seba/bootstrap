@@ -48,6 +48,12 @@ configure_gnome() {
   gnome-extensions enable tiling-assistant@ubuntu.com
   echo "- Enable App Indicators"
   gnome-extensions enable ubuntu-appindicators@ubuntu.com
+  if ! dpkg --list vanilla-gnome-default-settings > /dev/null; then
+    echo "- Install vanilla GNOME"
+    apt_install gnome-session vanilla-gnome-default-settings
+    echo "Press enter to log out. Select GNOME on login"
+    gnome-session-quit
+  fi
   echo_done
 }
 
