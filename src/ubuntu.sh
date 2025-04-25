@@ -51,8 +51,9 @@ configure_gnome() {
   if ! dpkg --list vanilla-gnome-default-settings > /dev/null; then
     echo "- Install vanilla GNOME"
     apt_install gnome-session vanilla-gnome-default-settings
-    echo "Press enter to log out. Select GNOME on login"
+    read -p "Press ENTER to log out. Select GNOME on login"
     gnome-session-quit
+    read -p "Waiting for log out ... Press ENTER to cancel"
   fi
   echo_done
 }
