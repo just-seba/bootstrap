@@ -132,6 +132,8 @@ configure_bash() {
   fi
 
   echo "✏️ Custom font"
+  # TODO: Install static ttf from GitHub Release or Rider can't set the font weight
+  # see: https://askubuntu.com/questions/3697/how-do-i-install-fonts
   apt_install_q fonts-cascadia-code
   local CURRENT=$(gsettings get org.gnome.desktop.interface monospace-font-name)
   local TARGET="Cascadia Code PL Semi-Light 11"
